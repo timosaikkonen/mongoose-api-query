@@ -9,13 +9,13 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "express": "3.0.0rc3",
+    "express": "3.3.x",
     "mocha": "*",
     "zombie": "*",
     "expect.js": "*"
   },
   "dependencies": {
-    "mongoose": "~3.0.2"
+    "mongoose": "3.6.x"
   },
   "homepage": "http://github.com/adamjacobbecker/mongoose-api-query"
 }
