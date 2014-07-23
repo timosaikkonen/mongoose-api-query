@@ -18,4 +18,4 @@ var monsterSchema = new mongoose.Schema({
 monsterSchema.index({'loc':'2d'});
 monsterSchema.plugin(mongooseApiQuery);
 
-module.exports = DB.model('Monster', monsterSchema);
+module.exports = mongoose.model('Monster', monsterSchema);

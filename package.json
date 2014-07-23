@@ -15,7 +15,7 @@
     "expect.js": "*"
   },
   "dependencies": {
-    "mongoose": "3.6.x"
+    "mongoose": "3.8.x"
   },
   "homepage": "http://github.com/adamjacobbecker/mongoose-api-query"
 }
