@@ -24,7 +24,7 @@ describe('mongoose-api-query', function(){
 
   it('without any query params, loads all monsters', function(done){
     browser.visit("http://localhost:3000/test1", function () {
-      hasMonsterCount(6);
+      hasMonsterCount(7);
       done();
     });
   });
@@ -38,7 +38,7 @@ describe('mongoose-api-query', function(){
 
   it('ignores unmatched params', function(done){
     browser.visit("http://localhost:3000/test1?coffee=black", function () {
-      hasMonsterCount(6);
+      hasMonsterCount(7);
       done();
     });
   });
@@ -108,28 +108,28 @@ describe('mongoose-api-query', function(){
 
   it('excludes results that match {ne} param for Numbers', function(done){
     browser.visit("http://localhost:3000/test1?monster_identification_no={ne}200", function () {
-      hasMonsterCount(4);
+      hasMonsterCount(5);
       done();
     });
   });
 
   it('excludes results that match {ne} param for Strings, case insensitive', function(done){
     browser.visit("http://localhost:3000/test1?name={ne}biggie", function () {
-      hasMonsterCount(4);
+      hasMonsterCount(5);
       done();
     });
   });
 
   it('handles paging of results', function(done){
     browser.visit("http://localhost:3000/test1?page=2&per_page=4", function () {
-      hasMonsterCount(2);
+      hasMonsterCount(3);
       done();
     });
   });
 
   it('defaults to 10 results per page', function(done){
     browser.visit("http://localhost:3000/test1?page=1", function () {
-      hasMonsterCount(6);
+      hasMonsterCount(7);
       done();
     });
   });
@@ -282,7 +282,8 @@ describe('mongoose-api-query', function(){
         hasMonster("Biggie Smalls the 2nd");
         hasMonster("Bessie the Lochness Monster");
         hasMonster("Clay Johnson");
-        hasMonsterCount(4);
+        hasMonster("AZ124584545");
+        hasMonsterCount(5);
         done();
       });
     });
@@ -293,7 +294,8 @@ describe('mongoose-api-query', function(){
         hasMonster("Biggie Smalls the 2nd");
         hasMonster("Bessie the Lochness Monster");
         hasMonster("Clay Johnson");
-        hasMonsterCount(4);
+        hasMonster("AZ124584545");
+        hasMonsterCount(5);
         done();
       });
     });
@@ -304,7 +306,8 @@ describe('mongoose-api-query', function(){
         hasMonster("Biggie Smalls the 2nd");
         hasMonster("Bessie the Lochness Monster");
         hasMonster("Clay Johnson");
-        hasMonsterCount(4);
+        hasMonster("AZ124584545");
+        hasMonsterCount(5);
         done();
       });
     });
@@ -380,7 +383,7 @@ describe('mongoose-api-query', function(){
 
     it('ignores a blank param', function(done){
       browser.visit("http://localhost:3000/test1?eats_humans=", function (){
-        hasMonsterCount(6);
+        hasMonsterCount(7);
         done();
       });
     });
@@ -437,6 +440,26 @@ describe('mongoose-api-query', function(){
       });
     });
 
+    describe('SchemaObjectId', function(){
+      it('does a basic filter', function(done){
+        browser.visit("http://localhost:3000/test1?monster_object_id=530088897c979cdb49475d9c", function (){
+          hasMonster("Clay Johnson");
+          hasMonsterCount(1);
+          done();
+        });
+      });
+    });
+
+
+    describe('RegexpStringContainingNumber', function(){
+      it('does a basic filter', function(done){
+        browser.visit("http://localhost:3000/test1?name=AZ1", function (){
+          hasMonster("AZ124584545");
+          hasMonsterCount(1);
+          done();
+        });
+      });
+    });
 
  });
 
